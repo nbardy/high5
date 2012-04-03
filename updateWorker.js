@@ -1,9 +1,12 @@
+//Set running to off on worker load
+self.isRunning = false;
+
 self.addEventListener('message', function (e) {
    if (e.data.command == 'initiate') {
       self.gameData = e.data.gameData;
       self.updateFunction = eval("(" + e.data.updateFunction + ")");
    }
-   else if (e.data.command == 'start') {
+   else if (e.data.command == 'start' && self.isRunning == false) {
       self.isRunning = true;
       //Start update function return
       self.updateInterval = setInterval( function () {
