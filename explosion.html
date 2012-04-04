@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Spring5</title>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>-->
+<script src="game.js"></script>
+<style type="text/css">
+body { background-color: black;}
+canvas {background-color: white; margin: auto;}
+h1 {color: white;}
+</style>
+</head>
+<body>
+<h1>Spring 5</h1>
+<canvas id="spring"></canvas>
+<div><button onclick='gi.start()'>Start</button></div>
+<div><button onclick='gi.pause()'>Pause</button></div>
+<div><a href='..'>More Examples</div>
+</body>
+<script>
+   function update(gdata) {
+      //Update Items
+      for (var i = 0; i < gdata.length; i++) {
+         gdata[i].x += gdata[i].speed.x;
+         gdata[i].y += gdata[i].speed.y;
+         gdata[i].speed.x += gdata[i].accel.x;
+         gdata[i].speed.y += gdata[i].accel.y;
+      }
+         
+      //Add new item
+      gdata.push({x: 200, y: 200, speed:{x: 0, y: 0}, accel: {x: .5 - Math.random(), y: .5 - Math.random()}, radius: Math.random()*4 +5});
+
+      return gdata;
+   }
+   function draw(gdata, canvas) {
+      ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      
+      for (var i = 0; i < gdata.length; i++) {
+         console.log(gdata[i]);
+         ctx.beginPath();
+         ctx.arc(gdata[i].x, gdata[i].y, gdata[i].radius, 0, Math.PI*2, true);
+         ctx.closePath();
+         
+         ctx.fill()
+      }
+   }
+
+   gameCanvas = document.getElementById('spring');
+   gameCanvas.width = 400;
+   gameCanvas.height = 400;
+   gi = new gameInstance([], update, gameCanvas, draw);
+
+</script>
+</html>
