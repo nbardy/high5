@@ -24,10 +24,11 @@ h1 {color: white;}
          gdata[i].y += gdata[i].speed.y;
          gdata[i].speed.x += gdata[i].accel.x;
          gdata[i].speed.y += gdata[i].accel.y;
+
       }
          
       //Add new item
-      gdata.push({x: 200, y: 200, speed:{x: 0, y: 0}, accel: {x: .5 - Math.random(), y: .5 - Math.random()}, radius: Math.random()*4 +5});
+      gdata.push({x: 200, y: 200, speed:{x: 0, y: 0}, accel: {x: (.5 - Math.random())*.1, y: (.5 - Math.random())*.1}, radius: Math.random()*4 +5});
 
       return gdata;
    }
@@ -37,7 +38,6 @@ h1 {color: white;}
 
       
       for (var i = 0; i < gdata.length; i++) {
-         console.log(gdata[i]);
          ctx.beginPath();
          ctx.arc(gdata[i].x, gdata[i].y, gdata[i].radius, 0, Math.PI*2, true);
          ctx.closePath();
