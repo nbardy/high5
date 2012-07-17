@@ -13,7 +13,7 @@ h1 {color: white;}
 <h1>Bouncy Ball</h1>
 <canvas id="spring"></canvas>
 <div><button onclick='gi.start()'>Start</button></div>
-<div><a href='..'>More Examples</div>
+<div><a href='http://divisibleZero.github.com/high5'>More Examples</a></div>
 </body>
 <script>
    function update(gdata) {
@@ -22,13 +22,19 @@ h1 {color: white;}
       speed = gdata.speed + -.1;
       //If hits bottom
       if( height <= gdata.radius) {
-         return { height: height + ( gdata.radius - height), speed: speed * gdata.bounce * -1,bounce: gdata.bounce, radius: gdata.radius};
-         }
-      else 
-         return { height: height, speed: speed, bounce: gdata.bounce, radius: gdata.radius};
-
-      
-
+         return { 
+            height: height + ( gdata.radius - height),
+            speed: speed * gdata.bounce * -1,
+            bounce: gdata.bounce,
+            radius: gdata.radius };
+      }
+      else {
+      return { 
+         height: height,
+         speed: speed,
+         bounce: gdata.bounce,
+         radius: gdata.radius };
+      }
    }
    function draw(gdata, canvas) {
       console.log(gdata.height);

@@ -5,7 +5,7 @@
 <script src="game.js"></script>
 <style type="text/css">
 body { background-color: black;}
-canvas {background-color: white; margin: auto;}
+canvas {background-color: white;}
 h1 {color: white;}
 </style>
 </head>
@@ -14,24 +14,28 @@ h1 {color: white;}
 <canvas id="spring"></canvas>
 <div><button onclick='gi.start()'>Start</button></div>
 <div><button onclick='gi.pause()'>Pause</button></div>
-<div><a href='..'>More Examples</div>
+<div><a href='http://divisibleZero.github.com/high5'>More Examples</a></div>
 </body>
 <script>
    function update(gdata) {
+      for (var i = 0; i < gdata.length; i++) {
+         if ((gdata[i].x < -50 ) || (gdata[i].x > 450 )|| (gdata[i].y < -50 )|| (gdata[i].y > 450)) {
+            gdata.splice(i,i);
+            }
+      }
       //Update Items
       for (var i = 0; i < gdata.length; i++) {
          gdata[i].x += gdata[i].speed.x;
          gdata[i].y += gdata[i].speed.y;
          gdata[i].speed.x += gdata[i].accel.x;
          gdata[i].speed.y += gdata[i].accel.y;
-
       }
-         
       //Add new item
       gdata.push({x: 200, y: 200, speed:{x: 0, y: 0}, accel: {x: (.5 - Math.random())*.1, y: (.5 - Math.random())*.1}, radius: Math.random()*4 +5});
 
       return gdata;
    }
+
    function draw(gdata, canvas) {
       ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);

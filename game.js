@@ -25,6 +25,7 @@ function gameInstance(gameData, updateFunction, canvas, drawFunc) {
    //Start begins the update worker and draw functions
    this.start = function() {
       this.updateWorker.postMessage({'command': 'start'});
+      
       //Start drawInterval
       var self = this;
       this.drawInterval = setInterval(function () {
