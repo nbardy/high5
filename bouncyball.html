@@ -16,7 +16,7 @@ h1 {color: white;}
 <div><a href='http://divisibleZero.github.com/high5'>More Examples</a></div>
 </body>
 <script>
-   var radius = 5;
+   var radius = 20;
    var elasticityCoeffecient = 0.9;
    function update(state, dt) {
       x0 = state.x;
@@ -40,7 +40,8 @@ h1 {color: white;}
       console.log(state.height);
       ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillRect(canvas.width/2, state.x, state.radius, state.radius);
+      // Draw a Rectangle not ball for simplicity
+      ctx.fillRect(canvas.width/2, state.x, radius, radius);
    }
 
    gameCanvas = document.getElementById('spring');
