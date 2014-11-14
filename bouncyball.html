@@ -16,37 +16,37 @@ h1 {color: white;}
 <div><a href='http://divisibleZero.github.com/high5'>More Examples</a></div>
 </body>
 <script>
-   function update(gdata) {
-      //Move ball
-      height = gdata.height + gdata.speed;
-      speed = gdata.speed + -.1;
-      //If hits bottom
-      if( height <= gdata.radius) {
-         return { 
-            height: height + ( gdata.radius - height),
-            speed: speed * gdata.bounce * -1,
-            bounce: gdata.bounce,
-            radius: gdata.radius };
+   var radius = 5;
+   var elasticityCoeffecient = 0.9;
+   function update(state, dt) {
+      x0 = state.x;
+      vx0 = state.vx;
+      x1 = x0 + state.vx0;
+      vx1 = state.vx0 + accelGravity * dt;
+
+      // Bounce if radius intersects with bottom
+      if(x - radius < 0) {
+        // Send the ball back up the amount of distance is has passed the baeline at 0.
+        x1 = x1 + (x1 - radius);
+        // Reverse the velocity and slow the ball
+        vx1 = -1 * vx0 * elastictyCoeffecient;
       }
-      else {
       return { 
-         height: height,
-         speed: speed,
-         bounce: gdata.bounce,
-         radius: gdata.radius };
+         x: x1.
+         vx: x0
       }
    }
-   function draw(gdata, canvas) {
-      console.log(gdata.height);
+   function draw(state, canvas) {
+      console.log(state.height);
       ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillRect(canvas.width/2, 400 - gdata.height, gdata.radius, gdata.radius);
+      ctx.fillRect(canvas.width/2, state.x, state.radius, state.radius);
    }
 
    gameCanvas = document.getElementById('spring');
    gameCanvas.width = 400;
    gameCanvas.height = 400;
-   gi = new gameInstance({height: 200, speed: 0, bounce: .9, radius: 4}, update, gameCanvas, draw);
+   gi = new gameInstance({x: 200, vx: 0}, update, gameCanvas, draw);
 
 </script>
 </html>
